@@ -4,7 +4,7 @@ from datetime import datetime
 import pytz
 import os
 
-TOKEN = "8422973800:AAHJ6F6KO8qgbrcKn5r4KAUdEjatuCOk8Kc"
+TOKEN = ""
 
 paises = {
     "🇧🇷 Brasil (São Paulo)": "America/Sao_Paulo",
