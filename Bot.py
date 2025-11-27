@@ -3,8 +3,11 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, fil
 from datetime import datetime
 import pytz
 import os
+from dotenv import load_dotenv
 
-TOKEN = ""
+load_dotenv()
+
+TOKEN = os.getenv("TELEGRAM_TOKEN")
 
 paises = {
     "🇧🇷 Brasil (São Paulo)": "America/Sao_Paulo",
@@ -18,12 +21,10 @@ paises = {
     "🇵🇪 Peru": "America/Lima",
     "🇪🇨 Equador": "America/Guayaquil",
     "🇲🇽 México": "America/Mexico_City",
-
     "🇺🇸 EUA (New York)": "America/New_York",
     "🇺🇸 EUA (Los Angeles)": "America/Los_Angeles",
     "🇨🇦 Canadá (Toronto)": "America/Toronto",
     "🇨🇦 Canadá (Vancouver)": "America/Vancouver",
-
     "🇬🇧 Inglaterra": "Europe/London",
     "🇫🇷 França": "Europe/Paris",
     "🇩🇪 Alemanha": "Europe/Berlin",
@@ -38,10 +39,8 @@ paises = {
     "🇩🇰 Dinamarca": "Europe/Copenhagen",
     "🇫🇮 Finlândia": "Europe/Helsinki",
     "🇵🇱 Polônia": "Europe/Warsaw",
-
     "🇷🇺 Rússia (Moscou)": "Europe/Moscow",
     "🇹🇷 Turquia": "Europe/Istanbul",
-
     "🇯🇵 Japão": "Asia/Tokyo",
     "🇨🇳 China": "Asia/Shanghai",
     "🇰🇷 Coreia do Sul": "Asia/Seoul",
@@ -49,11 +48,9 @@ paises = {
     "🇮🇩 Indonésia": "Asia/Jakarta",
     "🇸🇬 Singapura": "Asia/Singapore",
     "🇦🇪 Emirados Árabes": "Asia/Dubai",
-
     "🇦🇺 Austrália (Sydney)": "Australia/Sydney",
     "🇳🇿 Nova Zelândia": "Pacific/Auckland"
 }
-
 
 keyboard = ReplyKeyboardMarkup(
     [[p] for p in paises.keys()],
@@ -71,7 +68,6 @@ async def receber_resposta(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     tz = pytz.timezone(paises[pais])
     agora = datetime.now(tz).strftime("%d/%m/%Y • %H:%M:%S")
-
     await update.message.reply_text(f"🕒 Hora em {pais}:\n{agora}")
 
 def main():
